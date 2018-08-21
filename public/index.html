@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="style/index.css" />
+  </head>
+  <body>
+
+    <div class="wrapper">
+        <div class="wrapper_content">
+            <div class="header">
+                <div class="site_area">
+                    <div class="header_inner">
+                        <div class="logo"></div>
+                        <div class="menu">
+                            <ul>
+                                <li class="active"><a href="#">Сводка</a></li>
+                                <li><a href="#">Устройства</a></li>
+                                <li><a href="#">Сценарии</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="hamburger_menu">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content_top">
+                    <div class="site_area flex">
+                        <div class="main_panel panel">
+                            <div class="panel_header">
+                                <span class="panel_title">Главное</span>
+                            </div>
+                            <div class="panel_inner main_panel_inner">
+                                <div class="main_panel_inner_left">
+                                    <div class="main_panel_inner__header">
+                                        Привет, Илья!
+                                    </div>
+                                    <div class="house_status">
+                                        Двери и окна закрыты, сигнализация включена.
+                                    </div>
+                                    <div class="wether_panel">
+                                        <div class="wether_panel_element">
+                                            <div class="wether_panel_element__title">
+                                                Дома
+                                            </div>
+                                            <div class="wether_panel_element__temperature">
+                                                +23
+                                            </div>
+                                        </div>
+                                        <div class="wether_panel_element">
+                                            <div class="wether_panel_element__title">
+                                                <span>За окном</span>
+                                            </div>
+                                            <div class="wether_panel_element__temperature">
+                                                <span>+19</span>
+                                                <div class="wether_panel_element__image cloud"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main_panel_inner_right">
+                                    <div class="arrow_down arrow_up">
+
+                                    </div>
+                                    <div class="arrow_down arrow_down_js">
+
+                                    </div>
+                                    <div class="main_panel_inner_right__elements"></div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="elect_scripts panel">
+                            <div class="panel_header">
+                                <span class="panel_title">Избранные сценарии</span>
+                                <div class="move_arrows">
+                                    <div class="arrow_left">
+
+                                    </div>
+                                    <div class="arrow_right arrow_bold">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel_inner panel_inner__row_content panel_inner__elect_scripts">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content_bottom">
+                    <div class="site_area">
+                        <div class="filter_panel">
+                            <span class="panel_title">Избранные устройства</span>
+                            <div class="panel_filter_menu">
+                                <ul>
+                                    <li class="active">Все</li>
+                                    <li>Кухня</li>
+                                    <li>Зал</li>
+                                    <li>Лампочки</li>
+                                    <li>Камеры</li>
+                                </ul>
+                            </div>
+
+                            <div class="move_arrows right_bottom_position">
+                                <div class="arrow_left">
+
+                                </div>
+                                <div class="arrow_right arrow_bold">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel_elements">
+                        <div class="panel_row_elements appliances_panel">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="site_area flex space_between">
+                <div class="footer_menu">
+                    <ul>
+                        <li><a href="#">Помощь</a></li>
+                        <li><a href="#">Обратная связь</a></li>
+                        <li><a href="#">Разработчикам</a></li>
+                        <li><a href="#">Условия использования</a></li>
+                    </ul>
+                </div>
+
+                <div class="ya_copyright">
+                    2001-2017 ООО «Яндекс»
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="overlay">
+            <div class="popup_form">
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <script type="text/template" id="task_template">
+        <div class="main_panel_inner_right_element" data-type="<%=data.type%>" data-id="<%=data.id%>">
+            <div class="main_panel_inner_right_element__image <%=data.image%>">
+
+            </div>
+
+            <div class="main_panel_inner_right_element__title">
+                <%=data.title%>
+            </div>
+            <div class="main_panel_inner_right_element__text">
+                <%=data.text%>
+            </div>
+        </div>
+    </script>
+
+
+    <script type="text/template" id="elect_script_template">
+        <div class="main_panel_inner_right_element main_panel_inner_right_element__small_block <% if (data.invisible) { %> invisible <% } %>">
+            <div class="main_panel_inner_right_element__image <%=data.image%>">
+
+            </div>
+
+            <div class="main_panel_inner_right_element__title">
+                <%=data.title%>
+            </div>
+            <div class="main_panel_inner_right_element__text">
+                <%=data.text%>
+            </div>
+            </div>
+    </script>
+
+    <script type="text/template" id="temperature_classic_template">
+        <div class="device_config">
+            <div class="device_config_top">
+                <div class="device_config_top__header">
+                    <div class="title_panel">
+                        <div class="main_panel_inner__header">
+                            <%=data.title%>
+                        </div>
+                        <div class="house_status">
+                            <%=data.text%>
+                        </div>
+                    </div>
+                    <div class="weether_panel">
+                        <div class="wether_panel_element__temperature">
+                            <span><%=data.temperature%></span>
+                            <div class="wether_panel_element__image <%=data.image%>"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="device_config_top__middle">
+                    <div class="panel_filter_menu">
+                        <ul>
+                            <li class="active">Все</li>
+                            <li>Кухня</li>
+                            <li>Зал</li>
+                            <li>Лампочки</li>
+                            <li>Камеры</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="device_config_top__bottom">
+                    <div class="bottom_treshold">
+                        -10
+                    </div>
+                    <div class="top_treshold">
+                        +30
+                    </div>
+                    <div class="circle_picker">
+
+                    </div>
+                </div>
+            </div>
+            <div class="device_config_buttons">
+                <div class="button_ok">
+                    Применить
+                </div>
+                <div class="button_cancel">
+                    Закрыть
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="light_classic_template">
+        <div class="device_config">
+            <div class="device_config_top">
+                <div class="device_config_top__header">
+                    <div class="title_panel">
+                        <div class="main_panel_inner__header">
+                            <%=data.title%>
+                        </div>
+                        <div class="house_status">
+                            <%=data.text%>
+                        </div>
+                    </div>
+                    <div class="weether_panel">
+                        <div class="wether_panel_element__temperature">
+                            <span><%=data.temperature%></span>
+                            <div class="wether_panel_element__image <%=data.image%>"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="device_config_top__middle">
+                    <div class="panel_filter_menu">
+                        <ul>
+                            <li class="active">Все</li>
+                            <li>Кухня</li>
+                            <li>Зал</li>
+                            <li>Лампочки</li>
+                            <li>Камеры</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="device_light_config_top__bottom">
+                    <div class="bottom_treshold_sun">
+
+                    </div>
+                    <div class="top_treshold_sun">
+
+                    </div>
+                    <div class="circle_picker">
+
+                    </div>
+                </div>
+            </div>
+            <div class="device_config_buttons">
+                <div class="button_ok">
+                    Применить
+                </div>
+                <div class="button_cancel">
+                    Закрыть
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="temperature_alternative_template">
+        <div class="device_config">
+            <div class="device_config_top">
+                <div class="device_config_top__header">
+                    <div class="title_panel">
+                        <div class="main_panel_inner__header">
+                            <%=data.title%>
+                        </div>
+                        <div class="house_status">
+                            <%=data.text%>
+                        </div>
+                    </div>
+                    <div class="weether_panel">
+                        <div class="wether_panel_element__temperature">
+                            <span><%=data.temperature%></span>
+                            <div class="wether_panel_element__image <%=data.image%>"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="device_alt_temperature_config_top__bottom">
+
+                    <div class="big_circle">
+                        <div class="temperature_value">
+                            <%=data.temperature%>
+                        </div>
+                        <div class="gray_circle">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="device_config_buttons">
+                <div class="button_ok">
+                    Применить
+                </div>
+                <div class="button_cancel">
+                    Закрыть
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

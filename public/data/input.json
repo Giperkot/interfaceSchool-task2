@@ -1,0 +1,153 @@
+{
+  "tasks": [
+    {
+      "id": 0,
+      "image": "thermometer",
+      "title": "Philips Cooler",
+      "text": "Начнёт охлаждать в 16:30"
+    },
+    {
+      "id": 1,
+      "image": "thermometer",
+      "title": "Philips Cooler",
+      "text": "Начнёт охлаждать в 16:30"
+    },
+    {
+      "id": 2,
+      "image": "thermometer",
+      "title": "Philips Cooler",
+      "text": "Начнёт охлаждать в 16:30"
+    },
+    {
+      "id": 3,
+      "image": "thermometer",
+      "title": "Philips Cooler",
+      "text": "Начнёт охлаждать в 16:30"
+    }
+  ],
+  "scripts": [
+    {
+      "id": 0,
+      "image": "bright_sun",
+      "title": "Выключить весь свет в доме и во дворе",
+      "text": ""
+    },
+    {
+      "id": 1,
+      "image": "time",
+      "title": "Я ухожу",
+      "text": ""
+    },
+    {
+      "id": 2,
+      "image": "bright_sun",
+      "title": "Выключить весь свет в доме и во дворе",
+      "text": ""
+    },
+    {
+      "id": 3,
+      "image": "bright_sun",
+      "title": "Включить свет \u2028в коридоре",
+      "text": ""
+    },
+    {
+      "id": 4,
+      "image": "bright_thermometer",
+      "title": "Набрать горячую ванну",
+      "text": ""
+    },
+    {
+      "id": 5,
+      "image": "bright_sun",
+      "title": "Сделать пол тёплым во всей квартире",
+      "text": ""
+    },
+    {
+      "id": 6,
+      "image": "bright_sun",
+      "title": "Включить свет в коридоре",
+      "text": ""
+    },
+    {
+      "id": 7,
+      "image": "bright_thermometer",
+      "title": "Набрать горячую ванну",
+      "text": ""
+    }
+  ],
+  "appliances": [
+    {
+      "id": 0,
+      "image": "bright_sun",
+      "title": "Xiaomi Yeelight LED Smart Bulb",
+      "text": "Включено",
+      "light": 15,
+      "action": "light_classic"
+    },
+    {
+      "id": 1,
+      "image": "sun",
+      "title": "D-Link Omna 180 Cam",
+      "text": "Включится в 17:00",
+      "action": "light_classic"
+    },
+    {
+      "id": 2,
+      "image": "thermometer",
+      "title": "Elgato Eve Degree Connected",
+      "text": "Выключено до 17:00",
+      "temperature": 23,
+      "action": "temperature_classic"
+    },
+    {
+      "id": 3,
+      "image": "sun",
+      "title": "LIFX Mini Day & Dusk A60 E27",
+      "text": "Включится в 17:00",
+      "action": "light_classic"
+    },
+    {
+      "id": 4,
+      "image": "bright_sun",
+      "title": "Xiaomi Mi Air Purifier 2S",
+      "text": "Включено",
+      "action": "light_classic"
+    },
+    {
+      "id": 5,
+      "image": "sun",
+      "title": "Philips Zhirui",
+      "text": "Выключено",
+      "action": "light_classic"
+    },
+    {
+      "id": 6,
+      "image": "bright_sun",
+      "title": "Xiaomi Yeelight LED Smart Bulb",
+      "text": "Включено",
+      "action": "light_classic"
+    },
+    {
+      "id": 7,
+      "image": "time",
+      "title": "D-Link Omna 180 Cam",
+      "text": "Включится в 17:00",
+      "action": "light_classic"
+    },
+    {
+      "id": 8,
+      "image": "bright_sun",
+      "title": "Elgato Eve Degree Connected",
+      "text": "Выключено до 17:00",
+      "action": "light_classic"
+    },
+    {
+      "id": 9,
+      "image": "thermometer",
+      "title": "Elgato Eve Degree Connected",
+      "text": "Выключено до 17:00",
+      "temperature": 23,
+      "action": "temperature_alternative"
+    }
+  ]
+}
