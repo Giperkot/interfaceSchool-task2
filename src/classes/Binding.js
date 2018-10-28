@@ -12,6 +12,7 @@ class Binding {
 
         this.leftScrollMouseDown = false;
         this.bottomScrollMouseDown = false;
+        this.middleScenarioouseDown = false;
 
         // mobile
         this.leftScrollMouseDownMobile = false;
@@ -27,7 +28,67 @@ class Binding {
 
         let leftScrollMarginTop = 0;
 
+        let bottomScrollMousePosition;
+
         // let startPoint = new Point(0, 0);
+
+        let startAnimationActionBottomScroll = function (evt) {
+            let pageX = (evt.pageX) ? evt.pageX : (evt.changedTouches) ? evt.changedTouches[0].pageX : 0;
+            let pageY = (evt.pageY) ? evt.pageY : (evt.changedTouches) ? evt.changedTouches[0].pageY : 0;
+
+            bottomScrollMousePosition = pageX;
+            self.bottomScrollMouseDown = true;
+
+            self.startPoint = new Point (pageX, pageY);
+
+            if (!evt.changedTouches) {
+                evt.preventDefault();
+                evt.stopPropagation();
+            }
+        };
+
+        let moveAnimationAction = function (evt) {
+            self.moveLeftScroll (evt);
+            moveBottomScroll (evt);
+
+            if (self.moveMiddleScroll) {
+                self.moveMiddleScroll(evt);
+            }
+        };
+
+        let endAnimationAction = function (evt) {
+
+            self.leftScrollMouseDown = false;
+            self.bottomScrollMouseDown = false;
+            self.middleScenarioouseDown = false;
+
+            let pageX = (evt.pageX) ? evt.pageX : (evt.changedTouches) ? evt.changedTouches[0].pageX : 0;
+            let pageY = (evt.pageY) ? evt.pageY : (evt.changedTouches) ? evt.changedTouches[0].pageY : 0;
+
+            if (self.startPoint.getDistance(new Point(pageX, pageY)) > 3) {
+                return;
+            }
+
+            // Обработка кликов по блокам.
+            let target = evt.target.closest(".main_panel_inner_right_element");
+            if (!target) {
+                return;
+            }
+
+            let type = target.getAttribute("data-type");
+            let id = target.getAttribute("data-id");
+
+            if (!type) {
+                return;
+            }
+
+            switch (type) {
+                case types.device:
+                    devicesArray[id].openForm(target);
+                    break;
+            }
+
+        };
 
         if (window.innerWidth > 900) {
 
@@ -111,8 +172,6 @@ class Binding {
         let appliancePanel = document.querySelector(".appliances_panel");
         let panelElementsGeometry = appliancePanel.getBoundingClientRect();
 
-        let bottomScrollMousePosition;
-
         let bottomScroll = new Scrollable({
             min: 0,
             max: panelElementsGeometry.width,
@@ -139,7 +198,9 @@ class Binding {
                 return;
             }
 
-            let delta = bottomScrollMousePosition - evt.pageX;
+            let pageX = (evt.pageX) ? evt.pageX : (evt.changedTouches) ? evt.changedTouches[0].pageX : 0;
+
+            let delta = bottomScrollMousePosition - pageX;
 
             if (delta > 0) {
                 bottomScroll.scrollBottom(appliancePanel, delta);
@@ -147,7 +208,7 @@ class Binding {
                 bottomScroll.scrollTop(appliancePanel, -delta);
             }
 
-            bottomScrollMousePosition = evt.pageX;
+            bottomScrollMousePosition = pageX;
             self.bottomScrollMouseDown = true;
         }
 
@@ -166,10 +227,12 @@ class Binding {
             evt.stopPropagation();
         });
 
-        panelElements.addEventListener("mousedown", function (evt) {
+        /*panelElements.addEventListener("mousedown", function (evt) {
             bottomScrollMousePosition = evt.pageX;
             self.bottomScrollMouseDown = true;
-        });
+        });*/
+        panelElements.addEventListener("mousedown", startAnimationActionBottomScroll);
+        panelElements.addEventListener("touchstart", startAnimationActionBottomScroll);
 
         appliancePanelLeftArrow.addEventListener("click", function (evt) {
 
@@ -186,43 +249,11 @@ class Binding {
             self.startPoint = new Point (evt.pageX, evt.pageY);
         });
 
-        document.addEventListener("mousemove", function (evt) {
+        document.addEventListener("mousemove", moveAnimationAction);
+        document.addEventListener("touchmove", moveAnimationAction);
 
-            self.moveLeftScroll (evt);
-            moveBottomScroll (evt);
-        });
-
-        document.addEventListener("mouseup", function (evt) {
-
-            self.leftScrollMouseDown = false;
-            self.bottomScrollMouseDown = false;
-
-            if (self.startPoint.getDistance(new Point(evt.pageX, evt.pageY)) > 3) {
-                return;
-            }
-
-            // Обработка кликов по блокам.
-
-            let target = evt.target.closest(".main_panel_inner_right_element");
-            if (!target) {
-                return;
-            }
-
-            let type = target.getAttribute("data-type");
-            let id = target.getAttribute("data-id");
-
-            if (!type) {
-                return;
-            }
-
-            switch (type) {
-                case types.device:
-                    devicesArray[id].openForm();
-                    break;
-            }
-
-        });
-
+        document.addEventListener("mouseup", endAnimationAction);
+        document.addEventListener("touchend", endAnimationAction);
 
     }
 
@@ -260,7 +291,8 @@ class Binding {
                 return;
             }
 
-            let delta = leftScrollMousePosition - evt.pageX;
+            let pageX = (evt.pageX) ? evt.pageX : (evt.changedTouches) ? evt.changedTouches[0].pageX : 0;
+            let delta = leftScrollMousePosition - pageX;
 
             if (delta > 0) {
                 topScroll.scrollBottom(scrollLeftInner, delta);
@@ -268,8 +300,7 @@ class Binding {
                 topScroll.scrollTop(scrollLeftInner, -delta);
             }
 
-            leftScrollMousePosition = evt.pageX;
-            // self.leftScrollMouseDown = true;
+            leftScrollMousePosition = pageX;
         };
 
         leftScroll.addEventListener("wheel", function (evt) {
@@ -283,10 +314,80 @@ class Binding {
             evt.stopPropagation();
         });
 
-        leftScroll.addEventListener("mousedown", function (evt) {
-            leftScrollMousePosition = evt.pageX;
+        leftScroll.addEventListener("touchstart", function (evt) {
+
+            let pageX = (evt.pageX) ? evt.pageX : (evt.changedTouches) ? evt.changedTouches[0].pageX : 0;
+            let pageY = (evt.pageY) ? evt.pageY : (evt.changedTouches) ? evt.changedTouches[0].pageY : 0;
+
+            leftScrollMousePosition = pageX;
             self.leftScrollMouseDown = true;
+
+            self.startPoint = new Point (pageX, pageY);
+
+            if (!evt.changedTouches) {
+                evt.preventDefault();
+                evt.stopPropagation();
+            }
         });
+
+        let middleScenariosPanel = document.querySelector(".panel_inner__elect_scripts");
+        let middleScenariosPanelParent = middleScenariosPanel.parentNode;
+        let scenariosLength = middleScenariosPanel.children.length;
+        middleScenariosPanel.style.width = (scenariosLength * 200 + (scenariosLength - 1) * 15) + "px";
+        let middleScrollMousePosition;
+
+        let middleScenarios = new Scrollable({
+            min: 0,
+            max: middleScenariosPanel.getBoundingClientRect().width,
+            isTransition: false,
+            cssProperty: "marginLeft",
+            currentValue: 0,
+            parentLength: window.innerWidth,
+            onMax: function () {
+
+            },
+            unMax: function () {
+
+            },
+            onMin: function () {
+
+            },
+            unMin: function () {
+
+            }
+        });
+
+        middleScenariosPanelParent.addEventListener("touchstart", function (evt) {
+            let pageX = (evt.pageX) ? evt.pageX : (evt.changedTouches) ? evt.changedTouches[0].pageX : 0;
+            let pageY = (evt.pageY) ? evt.pageY : (evt.changedTouches) ? evt.changedTouches[0].pageY : 0;
+
+            middleScrollMousePosition = pageX;
+            self.middleScenarioouseDown = true;
+
+            self.startPoint = new Point (pageX, pageY);
+
+            if (!evt.changedTouches) {
+                evt.preventDefault();
+                evt.stopPropagation();
+            }
+        });
+
+        self.moveMiddleScroll = function (evt) {
+            if (!self.middleScenarioouseDown) {
+                return;
+            }
+
+            let pageX = (evt.pageX) ? evt.pageX : (evt.changedTouches) ? evt.changedTouches[0].pageX : 0;
+            let delta = middleScrollMousePosition - pageX;
+
+            if (delta > 0) {
+                middleScenarios.scrollBottom(middleScenariosPanel, delta);
+            } else {
+                middleScenarios.scrollTop(middleScenariosPanel, -delta);
+            }
+
+            middleScrollMousePosition = pageX;
+        }
 
     }
 

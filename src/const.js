@@ -14,8 +14,12 @@ export const types = {
 };
 
 export const defaultScroll = {
-    velocity: 10,
+    velocity: 100,
     transitionDelay: 0.5
+};
+
+export const projectConsts = {
+    url: "localhost:8080/"
 };
 
 export let temperatureClassicTemplateFunc = null;

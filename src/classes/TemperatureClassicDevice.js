@@ -18,14 +18,15 @@ class TemperatureClassicDevice extends Device {
         this.temperature = config.temperature;
     }
 
-    openForm() {
+    openForm(targetElm) {
+        let poppForm = document.querySelector(".popup_form");
+        super.openForm(poppForm, targetElm);
 
         if (!temperatureClassicTemplateFunc) {
             let template = document.getElementById("temperature_classic_template");
             temperatureClassicTemplateFunc = _.template(template.innerHTML);
         }
 
-        let poppForm = document.querySelector(".popup_form");
         poppForm.innerHTML = temperatureClassicTemplateFunc({
             data: {
                 title: this.title,
@@ -33,23 +34,6 @@ class TemperatureClassicDevice extends Device {
                 temperature: this.temperature,
                 image: this.image
             }
-        });
-
-        poppForm.parentNode.style.display = "flex";
-
-        poppForm.addEventListener("click", function (evt) {
-            let target = evt.target;
-
-            if (target.closest(".button_cancel")) {
-                poppForm.parentNode.style.display = "none";
-                return;
-            }
-
-            if (target.closest(".button_ok")) {
-                poppForm.parentNode.style.display = "none";
-                return;
-            }
-
         });
 
 
