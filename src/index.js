@@ -7,12 +7,10 @@ function setMapSize (mapsId) {
 }*/
 
 import {getHttpPromise} from "./api";
-import Task from "./classes/Task";
 import "./libs/lodash.min";
 import Binding from "./classes/Binding.js";
-import Device from "./classes/Device";
 import TemperatureClassicDevice from "./classes/TemperatureClassicDevice";
-import {types, actions} from "./const";
+import {actions, projectConsts, types} from "./const";
 import LigthClassicDevice from "./classes/LigthClassicDevice";
 import TemperatureAlternativeDevice from "./classes/TemperatureAlternativeDevice";
 
@@ -118,7 +116,15 @@ document.addEventListener("DOMContentLoaded", function () {
         window.devicesArray = deviceArray;
     });
 
+    let config2 = {
+        url: projectConsts.url + "api/public/register",
+        method: "GET",
+        contentType: "application/json",
+    };
 
+    getHttpPromise(config2).then(function (response) {
+        console.log(response);
+    });
 
 
 
