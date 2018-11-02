@@ -2,13 +2,13 @@
 
 class Device {
     constructor (config) {
-        this.id = config.id
+        this.id = config.id;
         this.image = config.image;
         this.title = config.title;
         this.text = config.text;
     }
 
-    openForm (poppForm, targetElm) {
+    openForm (poppForm, targetElm, closeConfig) {
         let overlay = poppForm.parentNode;
         let wrapperContent = document.querySelector(".wrapper_content");
 
@@ -52,6 +52,10 @@ class Device {
                 poppForm.style.transition = "nome";
                 overlay.style.display = "none";
             }, 500);
+
+            closeConfig.element.removeEventListener("mousedown", closeConfig.onMouseDown);
+            document.removeEventListener("mousemove", closeConfig.onMouseMove);
+            document.removeEventListener("mouseup", closeConfig.onMouseUp);
         }
 
         poppForm.addEventListener("click", function (evt) {

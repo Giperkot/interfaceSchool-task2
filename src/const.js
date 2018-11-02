@@ -19,7 +19,7 @@ export const defaultScroll = {
 };
 
 export const projectConsts = {
-    url: "localhost:8080/"
+    url: "http://localhost:8080/"
 };
 
 export let temperatureClassicTemplateFunc = null;

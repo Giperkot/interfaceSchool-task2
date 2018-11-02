@@ -117,13 +117,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     let config2 = {
-        url: projectConsts.url + "api/public/register",
+        url: projectConsts.url + "api/public/login",
         method: "GET",
         contentType: "application/json",
     };
 
     getHttpPromise(config2).then(function (response) {
         console.log(response);
+
+        let data = JSON.parse(response);
+        document.querySelector(".user_name").innerHTML = (data.firstName) ? data.firstName : "Илья";
+
     });
 
 

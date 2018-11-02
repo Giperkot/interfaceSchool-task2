@@ -6,7 +6,8 @@ module.exports = {
   mode: 'development',
   entry: './src/index.js',
   output: {
-      path: PUBLIC_PATH,
+      // path: PUBLIC_PATH,
+      path: "C:\\Users\\Lodbrok\\Documents\\javaProjects\\educationWeb\\backend\\src\\main\\resources\\templates",
       filename: "index.js",
       library: "index"
   },
@@ -16,7 +17,7 @@ module.exports = {
     port: 3000,
     // before: initBackendStub
   }
-  /*,
+  ,
 
-  devtool: "cheap-inline-module-source-map"*/
+  devtool: "cheap-inline-module-source-map"
 };
